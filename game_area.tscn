@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://544j4w4gq4ht"]
+
+[ext_resource type="PackedScene" uid="uid://dpyrsfgn2cyn5" path="res://Player.tscn" id="1_k6ijl"]
+[ext_resource type="PackedScene" uid="uid://gj0i7gnjbvh2" path="res://exit.tscn" id="2_kv016"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rwmft"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kd4ud"]
+albedo_color = Color(0.278431, 0.254902, 0.262745, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_do0jk"]
+
+[sub_resource type="Environment" id="Environment_nb5pr"]
+background_mode = 1
+background_color = Color(0.593503, 0.726996, 1, 1)
+background_energy_multiplier = 1.18
+ambient_light_source = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_tx6rk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_in34l"]
+albedo_color = Color(0.22131, 0.0724515, 1, 1)
+
+[node name="GameArea" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+disable_mode = 2
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_rwmft")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kd4ud")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00222778, 0, 0.0101364)
+shape = SubResource("WorldBoundaryShape3D_do0jk")
+
+[node name="Player" parent="." instance=ExtResource("1_k6ijl")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, -1.74846e-07, 1.73956e-07, -0.100744, 0.994912, -1.76146e-08, -0.994912, -0.100744, 0.34259, 160.095, 1.55841)
+light_energy = 7.059
+light_indirect_energy = 3.717
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nb5pr")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.941, 1, 0)
+mesh = SubResource("BoxMesh_tx6rk")
+surface_material_override/0 = SubResource("StandardMaterial3D_in34l")
+
+[node name="Cube2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.51364, 1, 23.1566)
+mesh = SubResource("BoxMesh_tx6rk")
+surface_material_override/0 = SubResource("StandardMaterial3D_in34l")
+
+[node name="Cube3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.941, 1, 22.2842)
+mesh = SubResource("BoxMesh_tx6rk")
+surface_material_override/0 = SubResource("StandardMaterial3D_in34l")
+
+[node name="Cube4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.61525, 1, -16.7839)
+mesh = SubResource("BoxMesh_tx6rk")
+surface_material_override/0 = SubResource("StandardMaterial3D_in34l")
+
+[node name="Cube5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.0675, 1, 0)
+mesh = SubResource("BoxMesh_tx6rk")
+surface_material_override/0 = SubResource("StandardMaterial3D_in34l")
+
+[node name="Exit" parent="." instance=ExtResource("2_kv016")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.078, 0.25, -30.099)
